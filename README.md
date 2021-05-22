@@ -17,7 +17,7 @@ services:
   web:
     image: weibell/tiny404
     ports:
-      - "10404:80"
+      - "80:80"
 ```
 
 ## Optional environment variables
