@@ -1,6 +1,6 @@
 # tiny404
 
-A tiny Docker container responding to any request with a minimal HTTP 404 response.
+A tiny Docker container responding to any request with a minimal HTTP 404 (or different) response.
 
 
 ## Usage
@@ -24,4 +24,4 @@ services:
 
 | Variable  | Default | Possible Values |
 | - | - | - |
-| STATUS_CODE  | 404  | 200, 401, 403, 404, 500 |
+| `STATUS_CODE` | 404 | 200, 401, 403, 404, 500 |
