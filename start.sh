@@ -15,6 +15,5 @@ HEADER_FIELDS="Connection: close\r\nContent-Length: 0\r\n\r\n"
 COUNTER=1
 while true ; do
   printf "${STATUS_LINE}${HEADER_FIELDS}" | ncat -l 80 --nodns --send-only
-  echo "[$(date -u +%FT%T)] Request #${COUNTER}"
-  COUNTER=$((COUNTER+1))
+  echo "[$(date -u +%FT%TZ)] Request #${COUNTER}" && COUNTER=$((COUNTER+1))
 done
