@@ -1,6 +1,6 @@
 # tiny404
 
-A tiny Docker container responding to any request with a minimal HTTP 404 (or different) response.
+Tiny Docker container responding to any request with a minimal HTTP 404 (or different) response.
 
 
 ## Usage
