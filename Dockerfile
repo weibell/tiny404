@@ -8,3 +8,5 @@ ENV BODY=""
 
 EXPOSE 80
 CMD ["/tiny404.sh"]
+
+HEALTHCHECK CMD nc -z localhost 80 || exit 1
