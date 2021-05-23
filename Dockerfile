@@ -1,7 +1,10 @@
 FROM alpine
 
 RUN apk add --no-cache nmap-ncat
-COPY ./start.sh /
+COPY ./tiny404.sh /
+
+ENV STATUS_CODE=404
+ENV BODY=""
 
 EXPOSE 80
-CMD ["/start.sh"]
+CMD ["/tiny404.sh"]
