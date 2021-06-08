@@ -1,6 +1,6 @@
 #!/bin/sh
 
-create_payload() {
+create_response() {
   local reason
   case $STATUS_CODE in
     200) reason="OK";;
@@ -16,20 +16,8 @@ create_payload() {
   local status_line="HTTP/1.1 ${STATUS_CODE} ${reason}\r\n"
   local header_fields="Connection: close\r\nContent-Length: $(printf "$body" | wc -c)\r\n\r\n"
 
-  PAYLOAD="${status_line}${header_fields}${body}"
+  RESPONSE="${status_line}${header_fields}${body}"
 }
+create_response
 
-respond_to_request() {
-  printf "$PAYLOAD" | ncat -l 80 --nodns --send-only
-}
-
-log_counter() {
-  COUNTER=$((COUNTER+1))
-  echo "[$(date -u +%FT%TZ)] Request #${COUNTER}"
-}
-
-create_payload
-while true; do
-  respond_to_request
-  log_counter
-done
+socat -v -t0 TCP-LISTEN:80,reuseaddr,fork SYSTEM:"echo \"\\\"$RESPONSE\\\"\"" 2>&1
