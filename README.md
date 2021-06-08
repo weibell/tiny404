@@ -48,8 +48,3 @@ services:
       - STATUS_CODE=403
       - BODY="403\nForbidden"
 ```
-
-
-## Implementation notes
-
-`tiny404.sh` relies on specific behavior of netcat's `-q` option, which should cause the listener to terminate the connection upon reading EOF from stdin. Unfortunately, this behaviour is present in neither Alpine's `netcat-openbsd` nor BusyBox's `nc`. Therefore, `nmap-ncat` is used with the `--send-only` option (documented [here](https://secwiki.org/w/Ncat/EOF_behavior)) instead.
