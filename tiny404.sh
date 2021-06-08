@@ -12,7 +12,7 @@ create_response() {
   esac
 
   local body=""
-  if [ -n "$BODY" ]; then local body="${BODY}\n"; fi
+  if [ -n "$BODY" ]; then body="${BODY}\n"; fi
   local status_line="HTTP/1.1 ${STATUS_CODE} ${reason}\r\n"
   local header_fields="Connection: close\r\nContent-Length: $(printf "$body" | wc -c)\r\n\r\n"
 
@@ -20,4 +20,4 @@ create_response() {
 }
 create_response
 
-socat -v -t0 TCP-LISTEN:80,reuseaddr,fork SYSTEM:"echo \"\\\"$RESPONSE\\\"\"" 2>&1
+socat -v -t0 TCP-LISTEN:80,reuseaddr,end-close,fork SYSTEM:"echo \"\\\"$RESPONSE\\\"\"" 2>&1
